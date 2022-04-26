@@ -5,6 +5,7 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
+
   pull_request:
     branches:
       - main
@@ -30,7 +31,8 @@ jobs:
       - name: Run a one-line script
         run: echo $(date) > version.txt
         
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - if: github.event.state != 'success'
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Automated version bump on merge to main"
 
