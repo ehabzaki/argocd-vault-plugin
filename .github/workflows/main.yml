@@ -8,28 +8,28 @@ on:
   pull_request:
     branches:
       - main
+  pull_request_review:
+    types: [submitted]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  approved:
-    if: github.event.review.state == 'approved'
-  # This workflow contains a single job called "build"
-
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  build:
+    runs-on: ubuntu-latest #or any other runner
     steps:
+      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - if: github.event.review.state == 'approved'
+        name: Run a one-line script
         run: echo Hello2 > version.txt
         
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - if: github.event.review.state == 'approved'
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Automated version bump on merge to main"
 
