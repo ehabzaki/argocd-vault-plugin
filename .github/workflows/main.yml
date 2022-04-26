@@ -5,9 +5,12 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
+
   pull_request:
     branches:
       - main
+    types:
+      - create
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -22,13 +25,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-   #   - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo $(date) > version.txt
         
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - if: github.event.state != 'success'
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Automated version bump on merge to main"
 
