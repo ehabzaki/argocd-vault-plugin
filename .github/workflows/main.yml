@@ -26,7 +26,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello > version.txt
+        run: echo Hello2 > version.txt
         
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
