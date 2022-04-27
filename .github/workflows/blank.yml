@@ -15,4 +15,9 @@ jobs:
           fetch-depth: 0                # fetch the whole repo history
 
       - name: Git Version
+        id: dd
         uses: codacy/git-version@2.2.0
+        
+        
+      - name: echo
+        run: echo ${{ steps.dd.outputs.version }} hgg
