@@ -20,4 +20,4 @@ jobs:
         
         
       - name: echo
-        run: echo ${{ steps.dd.outputs }} hgg
+        run: echo ${{ steps.dd.outputs.version }} hgg
