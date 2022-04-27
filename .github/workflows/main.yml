@@ -34,7 +34,9 @@ jobs:
         uses: kamatama41/get-pr-number-action@v0
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo ${{ steps.action.outputs.number }} > version.txt
+        run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}"'@g  version.txt
+        # echo ${{ steps.action.outputs.number }} > version.txt
+             
         
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
