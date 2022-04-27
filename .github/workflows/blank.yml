@@ -16,3 +16,6 @@ jobs:
 
       - name: Git Version
         uses: codacy/git-version@2.2.0
+        
+      - name: echo
+        run: echo ${{VERSION}} hgg
