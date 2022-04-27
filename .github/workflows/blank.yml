@@ -24,3 +24,9 @@ jobs:
         
       - name: echo
         run: echo ${{ steps.dd.outputs.version }} hgg
+        
+        
+      - name: Bump version
+        uses: remorses/bump-version@js
+        with:
+          version_file: ./VERSION
