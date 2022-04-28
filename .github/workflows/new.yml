@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - development
-      - master
+      - main
 
 
   workflow_dispatch:
@@ -23,22 +23,30 @@ jobs:
         
         uses: kamatama41/get-pr-number-action@v0
       - name: Automated version update
-        run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
+        run: |
+         sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
+         git add .
+         if [ -n "$(git status --porcelain)" ]; then
+             git commit update the chart version
+             git push 
+         else
+           echo "no changes";
+         fi
              
-      - name: commit changes
-        if: ${{ job.status != 'success' }}
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "update the chart version"
-      - name: Check success
-        if: ${{ always() }}
-        run: echo [skip ci]/application.yaml
+#       - name: commit changes
+#         #if: ${{ job.status != 'success' }}
+#         uses: stefanzweifel/git-auto-commit-action@v4
+#         with:
+#           message: "update the chart version"
+#       - name: Check success
+#         if: ${{ always() }}
+#         run: echo [skip ci] 
              
-      - name: commit changes
-        if: ${{ job.status != 'success' }}
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "update the chart version"
-      - name: Check success
-        if: ${{ always() }}
-        run: echo [skip ci]
+#       - name: commit changes
+#         uses: EndBug/add-and-commit@v9
+#         with:
+#           message:: "update the chart version"
+#           pathspec_error_handling: ignore
+#       - name: Check success
+#         if: ${{ always() }}
+#         run: echo [skip ci]
