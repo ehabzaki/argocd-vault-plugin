@@ -27,6 +27,8 @@ jobs:
       - name: Automated version update
         run: |
          git add .
+         git fetch
+          git checkout sss
          if [ -n "$(git status --porcelain)" ]; then
              git commit update the chart version
              git push 
