@@ -1,9 +1,7 @@
 name: Git Version
 
-on:
-  push:
-    paths:
-      - .
+on: [push]
+
       
       
 jobs:
