@@ -1,26 +1,26 @@
-name: Git Version
+# name: Git Version
 
-on: [push]
+# on: [push]
 
       
       
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+# jobs:
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v2
+# #         with:
+# #           ref: ${{ github.head_ref }}   # checkout the correct branch name
+# #           fetch-depth: 0                # fetch the whole repo history
+        
+# #       - name: echo
+# #         run: echo ${{ steps.dd.outputs.version }} hgg
+        
+        
+#       - name: Bump version
+#         uses: remorses/bump-version@js
 #         with:
-#           ref: ${{ github.head_ref }}   # checkout the correct branch name
-#           fetch-depth: 0                # fetch the whole repo history
-        
-#       - name: echo
-#         run: echo ${{ steps.dd.outputs.version }} hgg
-        
-        
-      - name: Bump version
-        uses: remorses/bump-version@js
-        with:
-          version_file: ./VERSION
-        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           version_file: ./VERSION
+#         env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
