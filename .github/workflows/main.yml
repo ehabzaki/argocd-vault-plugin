@@ -32,5 +32,6 @@ jobs:
       - uses: clowdhaus/argo-cd-action/@main
   # CLI has already been downloaded in prior step, no call to GitHub API
         with:
-          command: version
-          options: --client
+          command: login ${{ secrets.ARGO_LINK }} 
+          options:  --username  ${{ secrets.ARGO_NAME }} --password  ${{ secrets.ARGO_PASSWORD }} --grpc-web
+
