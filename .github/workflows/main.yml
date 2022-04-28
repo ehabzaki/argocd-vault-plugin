@@ -5,12 +5,10 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-
+  push:
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
-    types:
-      - opened
+    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -19,29 +17,20 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-#     steps:
-  
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#       - uses: actions/checkout@v3
+    steps:
+      - uses: clowdhaus/argo-cd-action/@main
+        env:
 
-#       - name: Get PR number
-#         id: action
-#         uses: kamatama41/get-pr-number-action@v0
-#       # Runs a single command using the runners shell
-#       - name: Run a one-line script
-#         run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}"'@g'  version.txt
-#         # echo ${{ steps.action.outputs.number }} > version.txt
-             
-        
-#       - uses: stefanzweifel/git-auto-commit-action@v4
-#         with:
-#           commit_message: "Automated version bump on merge to main"
-
-
-
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          command: version
+          options: --client
+      - uses: clowdhaus/argo-cd-action/@main
+  # CLI has already been downloaded in prior step, no call to GitHub API
+        with:
+          command: version
+          options: --client
