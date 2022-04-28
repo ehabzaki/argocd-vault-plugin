@@ -26,14 +26,12 @@ jobs:
 
       - name: Automated version update
         run: |
-         git config --global user.email "m.ehabzaki@gmail.com"
-         git config --global user.name "ehabzaki"
          git add .
          git fetch
          git checkout sss
 
          if [ -n "$(git status --porcelain)" ]; then
-             git commit -S -m "update the chart version"
+             git commit -m "update the chart version"
              git push 
          else
            echo "no changes";
