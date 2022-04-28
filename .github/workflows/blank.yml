@@ -1,8 +1,11 @@
 name: Git Version
 
 on:
-   pull_request:
-     types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    paths:
+      - ./
+      
+      
 jobs:
   lint:
     runs-on: ubuntu-latest
