@@ -24,23 +24,23 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
+#     steps:
   
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+#       - uses: actions/checkout@v3
 
-      - name: Get PR number
-        id: action
-        uses: kamatama41/get-pr-number-action@v0
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}"'@g'  version.txt
-        # echo ${{ steps.action.outputs.number }} > version.txt
+#       - name: Get PR number
+#         id: action
+#         uses: kamatama41/get-pr-number-action@v0
+#       # Runs a single command using the runners shell
+#       - name: Run a one-line script
+#         run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}"'@g'  version.txt
+#         # echo ${{ steps.action.outputs.number }} > version.txt
              
         
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Automated version bump on merge to main"
+#       - uses: stefanzweifel/git-auto-commit-action@v4
+#         with:
+#           commit_message: "Automated version bump on merge to main"
 
 
 
