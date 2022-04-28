@@ -26,6 +26,7 @@ jobs:
 
       - name: Automated version update
         run: |
+         git config --global user.name "github actions"
          git add .
          git fetch
          git checkout sss
