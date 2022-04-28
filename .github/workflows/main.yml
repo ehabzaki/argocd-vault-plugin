@@ -32,5 +32,5 @@ jobs:
       - uses: clowdhaus/argo-cd-action/@main
   # CLI has already been downloaded in prior step, no call to GitHub API
         with:
-          command: version
-          options: --client
+          command: login
+    #      options: --client
