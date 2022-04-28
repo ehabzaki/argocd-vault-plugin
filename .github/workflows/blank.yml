@@ -3,7 +3,7 @@ name: Git Version
 on:
   push:
     paths:
-      - ./
+      - .
       
       
 jobs:
