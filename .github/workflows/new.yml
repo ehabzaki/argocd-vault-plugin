@@ -30,7 +30,7 @@ jobs:
          git fetch
           git checkout sss
          if [ -n "$(git status --porcelain)" ]; then
-             git commit "update the chart version"
+             git commit -m "update the chart version"
              git push 
          else
            echo "no changes";
