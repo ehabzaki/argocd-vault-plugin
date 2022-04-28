@@ -20,11 +20,12 @@ jobs:
         
       - name: Get PR number
         id: action
-        
         uses: kamatama41/get-pr-number-action@v0
       - name: Automated version update
+        run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
+
+      - name: Automated version update
         run: |
-         sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
          git add .
          if [ -n "$(git status --porcelain)" ]; then
              git commit update the chart version
