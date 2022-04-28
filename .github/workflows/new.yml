@@ -26,19 +26,19 @@ jobs:
         run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
              
       - name: commit changes
-        if: ${{ job.status != 'success' }}
+        #if: ${{ job.status != 'success' }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "update the chart version"
+          message: "update the chart version"
       - name: Check success
         if: ${{ always() }}
-        run: echo [skip ci]/application.yaml
+        run: echo [skip ci] 
              
-      - name: commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          message:: "update the chart version"
-          pathspec_error_handling: ignore
-      - name: Check success
-        if: ${{ always() }}
-        run: echo [skip ci]
+#       - name: commit changes
+#         uses: EndBug/add-and-commit@v9
+#         with:
+#           message:: "update the chart version"
+#           pathspec_error_handling: ignore
+#       - name: Check success
+#         if: ${{ always() }}
+#         run: echo [skip ci]
