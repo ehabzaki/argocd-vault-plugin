@@ -26,8 +26,9 @@ jobs:
 
       - name: Automated version update
         run: |
-         git config --global user.email "action@github.com"
-         git config --global user.name "GitHub Action"
+         git config --global commit.gpgsign true
+         git config --global user.name "github actions"
+         git config --global user.signingkey 4AEE18F83AFDEB23
          git add .
          git fetch
          git checkout sss
