@@ -1,0 +1,44 @@
+name: chart versioning2
+on:
+  pull_request:
+    branches:
+      - development
+      - master
+
+
+  workflow_dispatch:
+
+jobs:
+  chart_versioning2:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get base ref branch
+        id: branch-name
+        uses: tj-actions/branch-names@v5.2
+        
+      - name: Get PR number
+        id: action
+        
+        uses: kamatama41/get-pr-number-action@v0
+      - name: Automated version update
+        run: sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
+             
+      - name: commit changes
+        if: ${{ job.status != 'success' }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "update the chart version"
+      - name: Check success
+        if: ${{ always() }}
+        run: echo [skip ci]/application.yaml
+             
+      - name: commit changes
+        if: ${{ job.status != 'success' }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "update the chart version"
+      - name: Check success
+        if: ${{ always() }}
+        run: echo [skip ci]
