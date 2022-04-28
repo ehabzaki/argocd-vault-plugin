@@ -1,21 +1,18 @@
 name: Git Version
 
-on:
-  pull_request:
-    branches:
-      - main
-  push:
-    paths:
-      - .github/workflows/blank.yml
+on: [push]
+
+      
+      
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}   # checkout the correct branch name
-          fetch-depth: 0                # fetch the whole repo history
+#         with:
+#           ref: ${{ github.head_ref }}   # checkout the correct branch name
+#           fetch-depth: 0                # fetch the whole repo history
         
 #       - name: echo
 #         run: echo ${{ steps.dd.outputs.version }} hgg
