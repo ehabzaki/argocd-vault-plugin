@@ -36,17 +36,6 @@ jobs:
          else
            echo "no changes";
          fi
-      - name: Create status check
-        env:
-          GITHUB_TOKEN: ${{ secrets.KEY }}
-        run: |
-          BUILD_COMMIT=$(git rev-parse HEAD)
-          curl \
-          -X POST \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/ehabzaki/argocd-vault-plugin/check-runs \
-          -d '{"name":"build", "head_sha": "'"$BUILD_COMMIT"'", "status": "completed", "conclusion": "success" }'
           
       - name: Staging Tests ✅
         if: ${{ success() }}
