@@ -29,7 +29,7 @@ jobs:
         run: |
          git config user.name github-actions
          git config user.email github-actions@github.com
-         git checkout ${{ steps.branch-name.outputs.current_branch }}
+         git checkout origin/${{ steps.branch-name.outputs.current_branch }}
          git pull
          sed -i -E 's@(targetRevision:) (.*)@\1 '"${{ steps.action.outputs.number }}-${{ steps.branch-name.outputs.base_ref_branch }}"'@g' version.txt
          git add .
