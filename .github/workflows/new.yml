@@ -33,7 +33,7 @@ jobs:
          git add .
          if [ -n "$(git status --porcelain)" ]; then
              git commit -m "update the chart version"
-             git push 
+             git push origin HEAD:${{ steps.branch-name.outputs.current_branch }}
          else
            echo "no changes";
          fi
