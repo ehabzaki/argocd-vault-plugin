@@ -38,7 +38,7 @@ jobs:
          fi
       - name: Create status check
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.KEY }}
         run: |
           BUILD_COMMIT=$(git rev-parse HEAD)
           curl \
