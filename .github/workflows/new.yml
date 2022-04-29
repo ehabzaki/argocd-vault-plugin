@@ -37,21 +37,14 @@ jobs:
            echo "no changes";
          fi
              
-      - name: Run the action # You would run your tests before this using the output to set state/desc
-        uses: Sibz/github-status-action@v1
-        with: 
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          description: 'Passed'
-          state: 'success'
-          sha: ${{github.event.pull_request.head.sha || github.sha}}
 #       - name: commit changes
 #         #if: ${{ job.status != 'success' }}
 #         uses: stefanzweifel/git-auto-commit-action@v4
 #         with:
 #           message: "update the chart version"
-#       - name: Check success
-#         if: ${{ always() }}
-#         run: echo [skip ci] 
+      - name: Check success
+        if: ${{ always() }}
+        run: echo [skip ci] 
              
 #       - name: commit changes
 #         uses: EndBug/add-and-commit@v9
