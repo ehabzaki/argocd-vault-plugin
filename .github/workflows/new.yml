@@ -47,6 +47,25 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/ehabzaki/argocd-vault-plugin/check-runs \
           -d '{"name":"build", "head_sha": "'"$BUILD_COMMIT"'", "status": "completed", "conclusion": "success" }'
+          
+      - name: Staging Tests ✅
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.KEY }}
+        # set the merge commit status check
+        # using GitHub REST API
+        # see https://docs.github.com/en/rest/reference/repos#create-a-commit-status
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "context": "chart_versioning2",
+            "state": "success",
+            "description": "chart_versioning2",
+            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }'
 #       - name: commit changes
 #         #if: ${{ job.status != 'success' }}
 #         uses: stefanzweifel/git-auto-commit-action@v4
