@@ -1,12 +1,9 @@
 name: chart versioning2
-on:
-  pull_request:
-    branches:
-      - development
-      - main
+
+on: [push]
 
 
-  workflow_dispatch:
+
 
 jobs:
   chart_versioning2:
